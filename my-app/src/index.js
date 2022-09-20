@@ -6,24 +6,47 @@ import reportWebVitals from './reportWebVitals';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
+const res = ReactDOM.createRoot(document.getElementById('Name'));
+
+
 root.render(
   <React.StrictMode>
+    <Input />
     <App />
     <button onClick={showName}>Show Sara</button>
-    <showName />
+    <button onClick={deleteresult}>delete</button>
   </React.StrictMode>
 );
-
-function showName() {
-    const element = (
-        <div>
-            <a>Sara</a>
-        </div>
-    );
-    return element;
+function Input() {
+  return (
+      <div className="Input">
+          <input type="text" id="searchUrl"></input>
+      </div>
+  )
 }
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
+function deleteresult() {
+    const element = (
+        <div>
+        </div>
+    );
+    res.render(element);
+}
+
+function showName() {
+    let getRes = document.getElementById('name');
+    console.log(getRes);
+    if(getRes == null) {
+        const element = (
+            <div>
+                <a id="name">Sara</a>
+            </div>
+        );
+        res.render(element);
+    } else {
+        deleteresult();
+    }
+
+}
+
 reportWebVitals();
