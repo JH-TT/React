@@ -23,6 +23,24 @@ function create() {
     }
 }
 
+function Delete() {
+    if(cache.length == 0) {
+        Res.render(
+            <div>
+                <a>캐시가 비어있습니다.</a>
+            </div>
+        );
+    } else {
+        let key = cache.shift();
+        Res.render(
+            <div>
+                <a>{key} 삭제</a>
+            </div>
+        )
+        Read();
+    }
+}
+
 function Read() {
     let values = ``
     if(cache.length == 0) {
@@ -45,15 +63,23 @@ function Read() {
 }
 
 function Crawling_Naver() {
-    axios.get("")
-    .then((res) => {
+    const value = document.getElementById('crawling-data');
+    if(value == null) {
+        axios.get("")
+        .then((res) => {
+            const element = (
+                <div id="crawling-data">
+                    {res.data}
+                </div>
+            );
+            crawl.render(element);
+        })
+    } else {
         const element = (
-            <div>
-                {res.data}
-            </div>
-        );
+            <div></div>
+        )
         crawl.render(element);
-    })
+    }
 }
 
 function showResult(url) {
@@ -80,7 +106,7 @@ function App() {
             <button className="btn" onClick={create}>Create</button>
             <button className="btn" onClick={Read}>Read</button>
             {/* <button className="btn" onClick={Update}>Update</button> */}
-            {/* <button className="btn" onClick={Delete}>Delete</button> */}
+            <button className="btn" onClick={Delete}>Delete</button>
             <button onClick={Crawling_Naver}>크롤링(네이버)</button>
         </div>
     );
