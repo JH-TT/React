@@ -62,14 +62,15 @@ function Read() {
     }
 }
 
-function Crawling_Naver() {
+function CrawlingNaver() {
     const value = document.getElementById('crawling-data');
     if(value == null) {
-        axios.get("")
+        axios.get("http://localhost:5051/test/getRecentContent")
         .then((res) => {
+            console.log(res);
             const element = (
-                <div id="crawling-data">
-                    {res.data}
+                <div>
+                    {JSON.stringify(res.data)}
                 </div>
             );
             crawl.render(element);
@@ -100,14 +101,20 @@ function showError() {
     Res.render(element);
 }
 
+function Update() {
+    const value = document.getElementById("answer");
+    if(value.length > 0){
+    }
+}
+
 function App() {
     return (
         <div className="App">
             <button className="btn" onClick={create}>Create</button>
             <button className="btn" onClick={Read}>Read</button>
-            {/* <button className="btn" onClick={Update}>Update</button> */}
+            <button className="btn" onClick={Update}>Update</button>
             <button className="btn" onClick={Delete}>Delete</button>
-            <button onClick={Crawling_Naver}>크롤링(네이버)</button>
+            <button onClick={CrawlingNaver}>크롤링</button>
         </div>
     );
 }

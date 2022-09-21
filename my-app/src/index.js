@@ -12,6 +12,7 @@ const res = ReactDOM.createRoot(document.getElementById('Name'));
 root.render(
   <React.StrictMode>
     <Input />
+    <AnswerInput />
     <App />
     <button onClick={showName}>Show Sara</button>
     <button onClick={deleteresult}>delete</button>
@@ -23,6 +24,14 @@ function Input() {
           <input type="text" id="searchUrl"></input>
       </div>
   )
+}
+
+function AnswerInput() {
+    return (
+        <div>
+            댓글 : <input type="text" id="answer" name="answer_content"></input>
+        </div>
+    );
 }
 
 function deleteresult() {
