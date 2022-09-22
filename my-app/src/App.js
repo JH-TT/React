@@ -1,5 +1,5 @@
 import logo from './logo.svg';
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import ReactDOM from 'react-dom/client';
 import './App.css';
 import axios from 'axios';
@@ -65,7 +65,7 @@ function Read() {
 function CrawlingNaver() {
     const value = document.getElementById('crawling-data');
     if(value == null) {
-        axios.get("http://localhost:5051/test/getRecentContent")
+        axios.get("/test/getRecentContent")
         .then((res) => {
             console.log(res);
             const element = (
@@ -102,8 +102,20 @@ function showError() {
 }
 
 function Update() {
-    const value = document.getElementById("answer");
+    const value = document.getElementById("answer").value;
+    console.log(value);
+    let url = "/test/1/setAnswerContent"
     if(value.length > 0){
+        let data = { "answer_content" : value }
+        axios.post(url, JSON.stringify(data),{
+            headers: {
+                "Content-Type" : `application/json`,
+            },
+        }).then((res) => {
+            console.log("업데이트 성공!");
+        }).catch(e => {
+            console.error(e);
+        })
     }
 }
 
